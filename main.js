@@ -22,6 +22,11 @@ async function fetchTicketData() {
         errorMessage.textContent = error.message
         return;
     }
+
+    //Task 4- Use finally to clean up after the fetch.
+    finally {
+
+    }
     //Task 3- Display Tickets Dynamically on the Page
     const ticketDiv = document.getElementById("ticket-display");
 
