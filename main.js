@@ -1,7 +1,7 @@
 // Task 2 Fetch Tickets Using Async/Await and Handle Errors
 async function fetchTicketData() {
     const errorMessage = document.getElementById("error-message")
-
+    let tickets;
 
     try {
         const response = await fetch(`https://jsonplaceholder.typicode.com/posts/`)
@@ -9,7 +9,7 @@ async function fetchTicketData() {
         if (!response.ok) {
             throw new Error("Failed to Fetch API")
         }
-        let tickets = await response.json();
+        tickets = await response.json();
         console.log('Tickets:', tickets);
 
         if (!tickets.length) {
@@ -20,18 +20,20 @@ async function fetchTicketData() {
     } catch (error) {
         console.log(error)
         errorMessage.textContent = error.message
+        return;
     }
     //Task 3- Display Tickets Dynamically on the Page
+    const ticketDiv = document.getElementById("ticket-display");
 
     tickets.forEach(ticket=> {
-        const ticketDiv = document.getElementById("ticket-display");
-        ticketDiv.classList.add("ticket")
+        const ticketElement = document.createElement("div");
+        ticketElement.classList.add("ticket")
 
         const ticketId = document.createElement("h3")
         ticketId.textContent = `Ticket ID: ${ticket.id}`;
 
         const customerName = document.createElement("p")
-        customerName.textContent = `Customer Name: user ${ticket.userID}`
+        customerName.textContent = `Customer Name: user ${ticket.userId}`
 
         const issueDescription = document.createElement("p")
         issueDescription.textContent = `Error Description: ${ticket.title}`
@@ -39,11 +41,12 @@ async function fetchTicketData() {
         const details = document.createElement("p")
         details.textContent = `Ticket Details: ${ticket.body}`
 
-        ticketDiv.appendChild(ticketId)
-        ticketDiv.appendChild(customerName)
-        ticketDiv.appendChild(issueDescription)
-        ticketDiv.appendChild(details)
+        ticketElement.appendChild(ticketId)
+        ticketElement.appendChild(customerName)
+        ticketElement.appendChild(issueDescription)
+        ticketElement.appendChild(details)
         
+        ticketDiv.appendChild(ticketElement)
 
     })
 }
