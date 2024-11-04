@@ -9,7 +9,7 @@ async function fetchTicketData() {
         if (!response.ok) {
             throw new Error("Failed to Fetch API")
         }
-        const tickets = await response.json();
+        let tickets = await response.json();
         console.log('Tickets:', tickets);
 
         if (!tickets.length) {
