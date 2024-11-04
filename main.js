@@ -20,33 +20,33 @@ async function fetchTicketData() {
     } catch (error) {
         console.log(error)
         errorMessage.textContent = error.message
-    }  
-}
+    }
+    //Task 3- Display Tickets Dynamically on the Page
 
-//Task 3- Display Tickets Dynamically on the Page
+    tickets.forEach(ticket=> {
+        const ticketDiv = document.getElementById("ticket-display");
+        ticketDiv.classList.add("ticket")
 
-tickets.forEach(ticket=>{
-    const ticketDiv = document.getElementById("ticket-display");
-    ticketDiv.classList.add("ticket")
+        const ticketId = document.createElement("h3")
+        ticketId.textContent = `Ticket ID: ${ticket.id}`;
 
-    const ticketId = document.createElement("h3")
-    ticketId.textContent = `Ticket ID: ${ticket.id}`;
+        const customerName = document.createElement("p")
+        customerName.textContent = `Customer Name: user ${ticket.userID}`
 
-    const customerName = document.createElement("p")
-    customerName.textContent = `Customer Name: user ${ticket.userID}`
+        const issueDescription = document.createElement("p")
+        issueDescription.textContent = `Error Description: ${ticket.title}`
 
-    const issueDescription = document.createElement("p")
-    issueDescription.textContent = `Error Description: ${ticket.title}`
+        const details = document.createElement("p")
+        details.textContent = `Ticket Details: ${ticket.body}`
 
-    const details = document.createElement("p")
-    details.textContent = `Ticket Details: ${ticket.body}`
-
-    ticketDiv.appendChild(ticketId)
-    ticketDiv.appendChild(customerName)
-    ticketDiv.appendChild(issueDescription)
-    ticketDiv.appendChild(details)
+        ticketDiv.appendChild(ticketId)
+        ticketDiv.appendChild(customerName)
+        ticketDiv.appendChild(issueDescription)
+        ticketDiv.appendChild(details)
         
 
-})
+    })
+}
+
 
 fetchTicketData()
